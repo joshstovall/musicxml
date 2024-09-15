@@ -54,22 +54,6 @@ p, ul, table {
 .nestedul {
     margin-bottom: 0;
 }
-.xmlmarkup {
-    display: block;
-    white-space: pre;
-    font: 14px "courier new",courier,fixed-width;
-    color: #333;
-}
-.xmlmarkup .tag, .xmlmarkup .attr {
-    color: #000;
-}
-.xmlmarkup a:link {
-    color: #000;
-    text-decoration: none;
-}
-.xmlmarkup a:hover {
-    color: #f00;
-}
 .nobr {
     white-space: nowrap;
 }
@@ -183,19 +167,105 @@ main {
     text-decoration: underline;
 }
 
-/* Utils */
+/* syntax highlighting */
 .xmlmarkup {
+    white-space: pre;
+}
+.xmlmarkup, pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+pre.xmlmarkup {
+    font-size: 18px;
+}
+div.xmlmarkup {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.xmlmarkup a:link {
+    text-decoration: none;
+}
+.xmlmarkup a:link:hover {
+    text-decoration: underline;
+}
+pre.xmlmarkup:not(.boldtags) {
+    display: block;
+    line-height: inherit;
+    color: #00ff59;
     border: 1px solid hsla(0, 0%, 0%, 0.15);
     border-radius: 6px;
     padding: 15px;
-    background: white;
+    background: #202020;
     overflow: auto;
 }
-.markupcode .xmlmarkup {
-    border: none;
-    padding: 0;
+.boldtags .tag {
+    font-weight: bold;
+    color: black !important
+}
+pre.xmlmarkup .quote,
+pre.xmlmarkup .attrval {
+    color: #72f0f3;
+}
+pre.xmlmarkup .bracket,
+pre.xmlmarkup .slash,
+pre.xmlmarkup .equals {
+    color: #a0a0a0 !important;
+}
+pre.xmlmarkup .tag {
+    color: #e2e2e2;
+}
+pre.xmlmarkup .tag,
+pre.xmlmarkup .attr {
+    color: #e2e2e2;
+}
+pre.xmlmarkup a:link {
+    color: #e2e2e2;
+}
+pre.xmlmarkup a:hover {
+    color: #f00 !important;
+}
+pre.xmlmarkup .attrname {
+    color: #929eff;
+}
+pre.xmlmarkup .xmltxt {
+    color: #00ff59;
+}
+pre.xmlmarkup .attr {
+    color: #1ae695;
+}
+div.xmlmarkup .tag {
+    color: #5a5a5a;
+}
+/* no dif */
+.xmlmarkup .nodiff {
+    color: #a0a0a0;
+}
+.xmlmarkup .nodiff .attrval{
+    color: #a0a0a0;
+}
+/* diff */
+.diff .tag {
+    font-weight: bold;
+}
+.xmlmarkup .diff {
+    color: #a0a0a0;
+}
+.xmlmarkup .diff .tag {
+    color: rgb(0, 0, 0);
+}
+.xmlmarkup .diff .attrname {
+    color: #d82c2c !important;
+}
+.xmlmarkup .diff .attrval {
+    color: #0366d6;
+    font-weight: bold;
+}
+.xmlmarkup .diff .xmltxt {
+    color: #000000;
+}
+.xmlmarkup .nodiff .xmltxt {
+    color: black;
 }
 
+/* Toggle */
 .toggle {
     appearance: none;
     -webkit-appearance: none;
@@ -258,4 +328,45 @@ main {
         transform: translateX(0%);
         min-height: 100%;
     }
+}
+
+/* Examples */
+.reference-examples {
+    max-width: 100%;
+}
+.examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
+.examples-grid div a {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.examples-grid div a img {
+    min-width: 100px;
+    height: 40%;
+    object-fit: scale-down;
+}
+.examples-grid div a span {
+    text-align: center;
+    line-height: 20px;
+    margin-bottom: 0em;
+}
+.examples-grid div a:hover span {
+    text-decoration: underline;
+}
+.tutorials .tutorial-grid {
+    display: grid;
+    gap: 60px;
+}
+.tutorials .tutorial-grid div {
+    margin-top: 30px;
 }

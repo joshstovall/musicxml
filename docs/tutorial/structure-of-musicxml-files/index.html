@@ -161,7 +161,7 @@
 <p>The score header contains some basic metadata about a musical score, such as the title and composer. It also contains the &lt;part-list&gt;, which lists all the parts or instruments in a musical score.</p>
 <p>As an example, take our MusicXML encoding of &#8220;Mut,&#8221; the 22nd song from Franz Schubert&#8217;s song cycle <em>Winterreise</em>. Here is a sample score header for that work:</p>
 
-<p><pre>  &lt;work&gt;
+<p><pre>&lt;work&gt;
     &lt;work-number&gt;D. 911&lt;/work-number&gt;
     &lt;work-title&gt;Winterreise&lt;/work-title&gt;
   &lt;/work&gt;
@@ -190,32 +190,32 @@
 
 <p>You see that this score header has all five of the possible top-level elements in the score header: the &lt;work&gt;, &lt;movement-number,&gt; &lt;movement-title&gt;, &lt;identification&gt;, and &lt;part-list&gt;. Only the part-list is required, all other elements are optional. Let&#8217;s look at each element in turn:</p>
 
-<p><pre>  &lt;work&gt;
+<p><pre>&lt;work&gt;
     &lt;work-number&gt;D. 911&lt;/work-number&gt;
     &lt;work-title&gt;Winterreise&lt;/work-title&gt;
   &lt;/work&gt;</pre></p>
 
 <p>In MusicXML, individual movements are usually represented as separate files. The <a href="../../musicxml-reference/elements/work/">&lt;work&gt;</a> element is used to identify the larger work of which this movement is a part. Schubert&#8217;s works are more commonly referred to via D. numbers than opus numbers, so that is what we use in the <a href="../../musicxml-reference/elements/work-number/">&lt;work-number&gt;</a> element; the <a href="../../musicxml-reference/elements/work-title/">&lt;work-title&gt;</a> contains the name of the larger work. If you have all the movements in a work represented, you can use the <a href="../../musicxml-reference/elements/opus-reference/">&lt;opus&gt;</a> element to link to the MusicXML <a href="../../opus-reference/elements/opus/">opus file</a> that in turn contains links to all the movements in the work.</p>
 
-<p><pre>  &lt;movement-number&gt;22&lt;/movement-number&gt;</pre></p>
+<p><pre>&lt;movement-number&gt;22&lt;/movement-number&gt;</pre></p>
 
 <p><em>Winterreise</em> is a cycle of 24 songs. We use the <a href="../../musicxml-reference/elements/movement-number/">&lt;movement-number&gt;</a> to identify that &#8220;Mut&#8221; is the 22nd song in the cycle &#8211; it is not restricted to use for movements in a symphony.</p>
 
-<p><pre>  &lt;movement-title&gt;Mut&lt;/movement-title&gt;</pre></p>
+<p><pre>&lt;movement-title&gt;Mut&lt;/movement-title&gt;</pre></p>
 
 <p>Similarly, we use the <a href="../../musicxml-reference/elements/movement-title/">&lt;movement-title&gt;</a> element for the title of the individual song. If you have a single song that is not part of a collection, you will usually put the title of the song in the &lt;movement-title&gt; element, and not use either the &lt;work&gt; or &lt;movement-number&gt; elements.</p>
 
-<p><pre>  &lt;identification&gt;
+<p><pre>&lt;identification&gt;
     &lt;creator type="composer"&gt;Franz Schubert&lt;/creator&gt;
     &lt;creator type="poet"&gt;Wilhelm Müller&lt;/creator&gt;</pre></p>
 
 <p>The <a href="../../musicxml-reference/elements/identification/">&lt;identification&gt;</a> element contains basic metadata elements based on the <a href="https://dublincore.org/specifications/dublin-core/">Dublin Core</a>. In this song, as many others, there are two creators: in this case, the composer and the poet. Therefore, we use two <a href="../../musicxml-reference/elements/creator/">&lt;creator&gt;</a> elements, and distinguish their roles with the type attribute. The type attribute should still be used even for an instrumental work with just one composer.</p>
 
-<p><pre>    &lt;rights&gt;Copyright © 2001 Recordare LLC&lt;/rights&gt;</pre></p>
+<p><pre>&lt;rights&gt;Copyright © 2001 Recordare LLC&lt;/rights&gt;</pre></p>
 
 <p>The <a href="../../musicxml-reference/elements/rights/">&lt;rights&gt;</a> element contains the copyright notice. You may have multiple &lt;rights&gt; elements if multiple copyrights are involved, say for the words and the music. As with the &lt;creator&gt; element, these can have type attributes to indicate what type of copyright is involved. In this example, both the words and music to Mut are in the public domain, but this element specifies a copyright to the electronic edition of the work.</p>
 
-<p><pre>    &lt;encoding&gt;
+<p><pre>&lt;encoding&gt;
       &lt;encoding-date&gt;2002-02-16&lt;/encoding-date&gt;
       &lt;encoder&gt;Michael Good&lt;/encoder&gt;
       &lt;software&gt;Finale 2002 for Windows&lt;/software&gt;
@@ -224,14 +224,14 @@
 
 <p>The <a href="../../musicxml-reference/elements/encoding/">&lt;encoding&gt;</a> element contains information about how the MusicXML file was created. Here we are using all four of the available sub-elements to describe the encoding. You can have multiple instances of these elements, and they can appear in any order.</p>
 
-<p><pre>    &lt;source&gt;Based on Breitkopf &amp;amp; Härtel edition of 1895&lt;/source&gt;
+<p><pre>&lt;source&gt;Based on Breitkopf &amp;amp; Härtel edition of 1895&lt;/source&gt;
   &lt;/identification&gt;</pre></p>
 
 <p>Different editions of music will contain different musical information. In our case, we used the Dover reprint of the Breitkopf &amp; Härtel edition of <em>Winterreise</em> as our starting point, correcting some errors in that published score.</p>
 
 <p>The &lt;identification&gt; element also may contain a <a href="../../musicxml-reference/elements/miscellaneous/">&lt;miscellaneous&gt;</a> element. This in turn contains <a href="../../musicxml-reference/elements/miscellaneous-field/">&lt;miscellaneous-field&gt;</a> elements, each with a name attribute. This can be helpful if your software contains some identification information not present in the MusicXML schema that you want to preserve when saving and reading from MusicXML.</p>
 
-<p><pre>  &lt;part-list&gt;
+<p><pre>&lt;part-list&gt;
     &lt;score-part id="P1"&gt;
       &lt;part-name&gt;Singstimme.&lt;/part-name&gt;
     &lt;/score-part&gt;

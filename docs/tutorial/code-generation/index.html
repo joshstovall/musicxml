@@ -126,14 +126,14 @@
 
 <p>Fortunately there are straightforward workarounds for these issues. Let's take the example of the xjc tool included with Java SE versions up through Java 8. We try to compile the code from the terminal using</p>
 
-<p><pre>xjc -catalog catalog.xml musicxml.xsd</pre></p>
+<p><pre class="nohighlight">xjc -catalog catalog.xml musicxml.xsd</pre></p>
 
 <p>Our first problem is that even though xjc has a catalog parameter, the Java 8 implementation of this feature is incomplete and does not work with MusicXML. We will get warning messages and errors about the xlink.xsd and xml.xsd files that will keep it from parsing.</p>
 
 <p>This can be worked around by editing the version of the musicxml.xsd file you use to generate the bindings to reference local copies directly, rather than via the XML catalog.</p>
 
-<p><pre>	&lt;xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/&gt;
-	&lt;xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="xlink.xsd"/&gt;
+<p><pre class="nohighlight">&lt;xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/&gt;
+lt;xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="xlink.xsd"/&gt;
 </pre></p>
 
 <p>This will let xjc parse the schema. Now it will encounter the other problems listed above. We will get error messages like these:
@@ -147,42 +147,46 @@
 
 <p>Let's create a musicxml.xjb external bindings file with the following content:</p>
 
-<p><pre>&lt;bindings xmlns="http://java.sun.com/xml/ns/jaxb"
-          xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"
-          xmlns:xs="http://www.w3.org/2001/XMLSchema"
-          version="2.1"&gt;
-    &lt;bindings schemaLocation="musicxml.xsd" version="1.0"&gt;
-        &lt;!-- Customize the package name --&gt;
-        &lt;schemaBindings&gt;
-            &lt;package name="org.musicxml"/&gt;
-        &lt;/schemaBindings&gt;
+<p><pre class="nohighlight">&lt;bindings version="2.1"
+  xmlns="http://java.sun.com/xml/ns/jaxb"
+  xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt; 
 
-        &lt;bindings node="//xs:complexType[@name='barline']"&gt;
-            &lt;bindings node=".//xs:attribute[@name='segno']"&gt;
-                &lt;property name="segnoAttribute"/&gt;
-            &lt;/bindings&gt;
-        &lt;/bindings&gt;
+  &lt;bindings schemaLocation="musicxml.xsd" version="1.0"&gt;
 
-        &lt;bindings node="//xs:complexType[@name='barline']"&gt;
-            &lt;bindings node=".//xs:attribute[@name='coda']"&gt;
-                &lt;property name="codaAttribute"/&gt;
-            &lt;/bindings&gt;
-        &lt;/bindings&gt;
+    &lt;!-- Customize the package name --&gt;
+    &lt;schemaBindings&gt;
+      &lt;package name="org.musicxml"/&gt;
+    &lt;/schemaBindings&gt;
 
-        &lt;bindings node="//xs:complexType[@name='credit']"&gt;
-            &lt;bindings node="./xs:sequence/xs:element[@name='link']"&gt;
-                &lt;property name="firstLink"/&gt;
-            &lt;/bindings&gt;
-            &lt;bindings node="./xs:sequence/xs:element[@name='bookmark']"&gt;
-                &lt;property name="firstBookmark"/&gt;
-            &lt;/bindings&gt;
-        &lt;/bindings&gt;
+    &lt;bindings node="//xs:complexType[@name='barline']"&gt;
+      &lt;bindings node=".//xs:attribute[@name='segno']"&gt;
+        &lt;property name="segnoAttribute"/&gt;
+      &lt;/bindings&gt;
     &lt;/bindings&gt;
+
+    &lt;bindings node="//xs:complexType[@name='barline']"&gt;
+      &lt;bindings node=".//xs:attribute[@name='coda']"&gt;
+        &lt;property name="codaAttribute"/&gt;
+      &lt;/bindings&gt;
+    &lt;/bindings&gt;
+
+    &lt;bindings node="//xs:complexType[@name='credit']"&gt;
+      &lt;bindings node="./xs:sequence/xs:element[@name='link']"&gt;
+        &lt;property name="firstLink"/&gt;
+      &lt;/bindings&gt;
+
+      &lt;bindings node="./xs:sequence/xs:element[@name='bookmark']"&gt;
+        &lt;property name="firstBookmark"/&gt;
+      &lt;/bindings&gt;
+
+    &lt;/bindings&gt;
+  &lt;/bindings&gt;
 &lt;/bindings&gt;</pre></p>
 
 <p>Now we can run xjc using this external bindings file:</p>
 
-<p><pre>xjc -catalog catalog.xml -b musicxml.xjb musicxml.xsd</pre></p>
+<p><pre class="nohighlight">xjc -catalog catalog.xml -b musicxml.xjb musicxml.xsd</pre></p>
 
 <p>When we do this, xjc runs without any error messages, and the .java files are placed in the org/musicxml folder.</p>
 
