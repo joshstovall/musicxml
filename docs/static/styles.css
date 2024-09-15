@@ -175,7 +175,7 @@ main {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 pre.xmlmarkup {
-    font-size: 18px;
+    font-size: 14px;
 }
 div.xmlmarkup {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -231,14 +231,20 @@ pre.xmlmarkup .xmltxt {
 pre.xmlmarkup .attr {
     color: #1ae695;
 }
+pre.xmlmarkup .comment {
+    color: #a0a0a0;
+}
 div.xmlmarkup .tag {
+    color: #5a5a5a;
+}
+div.xmlmarkup .attrval {
     color: #5a5a5a;
 }
 /* no dif */
 .xmlmarkup .nodiff {
     color: #a0a0a0;
 }
-.xmlmarkup .nodiff .attrval{
+.xmlmarkup .nodiff .attrval {
     color: #a0a0a0;
 }
 /* diff */

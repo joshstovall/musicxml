@@ -22,6 +22,11 @@ function syntaxHighlighter(elmnt) {
     if (elmnt.classList.contains('nohighlight'))
         return
     let xmlText = elmnt.innerHTML;
+    const comments = [];
+    xmlText = xmlText.replace(/&lt;!--([\s\S]*?)--&gt;/g, (_, comment) => {
+        comments.push(comment);
+        return `<!--comment_${comments.length - 1}-->`; 
+    });
     xmlText = xmlText.replace(/\n/g, '<br>').replace(/\s/g, '&nbsp;');
     xmlText = xmlText.replace(/&lt;(\!?\/?)([a-zA-Z0-9\-]+|\?)(.*?)(\/?)&gt;([^&lt;]*)/g, (_, p1, p2, p3, p4, p5) => {
         let tag = `<span class="bracket">&lt;${p1}</span><span class="tag">${p2}</span>`;
@@ -35,8 +40,8 @@ function syntaxHighlighter(elmnt) {
         tag += `<span class="bracket">&gt;</span>`;
         return `<span class="element">${tag}</span>${p5}`;
     });
-    // Handle comments separately if needed
-    xmlText = xmlText.replace(/&lt;!--(.*?)--&gt;/g, (_, comment) => {
+    xmlText = xmlText.replace(/<!--comment_(\d+)-->/g, (_, index) => {
+        const comment = comments[index].replace(/\n/g, '<br>') .replace(/\s/g, '&nbsp;');
         return `<span class="comment">&lt;!--${comment}--&gt;</span>`;
     });
     if (!elmnt.classList.contains('boldtags')) elmnt.classList.add('xmlmarkup');
